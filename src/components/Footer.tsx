@@ -7,7 +7,7 @@ const ovcaaOfficeGroups = [
     heading: "Teaching",
     offices: [
       { label: "Office for the Advancement of Teaching (OAT) Diliman", href: "https://oat.upd.edu.ph/" },
-      { label: "Office of International Linkages (OIL) Diliman", href: "https://oil.upd.edu.ph/" },
+      { label: "Office of International Linkages (OIL) Diliman", href: "https://international.upd.edu.ph/" },
     ],
   },
   {
@@ -21,7 +21,7 @@ const ovcaaOfficeGroups = [
   {
     heading: "Education Technology",
     offices: [
-      { label: "University Library (UL) Diliman", href: "https://library.upd.edu.ph/" },
+      { label: "University Library (UL) Diliman", href: "https://mainlib.upd.edu.ph/" },
       { label: "Interactive Learning Center (ILC) Diliman", href: "https://ilc.upd.edu.ph/" },
     ],
   },
@@ -75,9 +75,14 @@ export default function Footer() {
           <div className="lg:flex-1">
             <h3 className="text-[25px] font-medium">OVCAA Offices</h3>
             <HeadingUnderline width={182} />
-            <p className="mt-5 text-base font-bold text-white">
+            <a
+              href="https://ovcaa.upd.edu.ph/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 block text-base font-bold text-white hover:underline"
+            >
               OFFICE OF THE VICE-CHANCELLOR FOR ACADEMIC AFFAIRS
-            </p>
+            </a>
             <div className="mt-4 grid gap-6 sm:grid-cols-3">
               {ovcaaOfficeGroups.map((group) => (
                 <div key={group.heading}>
