@@ -154,7 +154,7 @@ export default async function DashboardPage() {
                 Reuse a past AFA
               </Link>
               <Link
-                href="/dashboard"
+                href="/submit/step-1"
                 className="inline-flex h-10 items-center justify-center rounded-control bg-ofa-yellow px-5 text-sm font-semibold text-navy transition-colors hover:bg-yellow-hover"
               >
                 + Submit an AFA
