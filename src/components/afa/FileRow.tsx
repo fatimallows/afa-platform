@@ -26,16 +26,16 @@ export default function FileRow({ name, kind, sizeLabel, status, onAction }: Fil
       </span>
       <span className="min-w-0 flex-1">
         <b className="block truncate">{name}</b>
-        {status.type === "done" && <span className="text-sm text-flow-muted">{sizeLabel} · Read by AI ✓</span>}
-        {status.type === "added" && <span className="text-sm text-flow-muted">{sizeLabel} · Ready</span>}
-        {status.type === "reading" && (
+        {status.type === "done" ? (
+          <span className="text-sm text-flow-muted">{sizeLabel} · Read by AI ✓</span>
+        ) : (
           <>
             <span className="text-sm text-flow-muted">
               {sizeLabel} · Reading… {status.percent}%
             </span>
             <span className="mt-1.5 block h-1.5 rounded-full bg-flow-track">
               <span
-                className="block h-1.5 rounded-full bg-flow-green transition-all duration-300"
+                className="block h-1.5 rounded-full bg-flow-green transition-all"
                 style={{ width: `${status.percent}%` }}
               />
             </span>

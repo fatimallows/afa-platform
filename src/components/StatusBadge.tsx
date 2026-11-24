@@ -21,15 +21,6 @@ const statusConfig: Record<AfaStatus, { label: string; bg: string; text: string 
   draft: { label: "Draft", bg: "bg-status-draft-bg", text: "text-status-draft-text" },
 };
 
-// Maps the `afas.status` column's values (see supabase/schema_afas.sql) to a badge.
-export const DB_STATUS_TO_BADGE: Record<string, AfaStatus> = {
-  submitted: "dept-chair",
-  dept_chair: "dept-chair",
-  ofa: "ofa",
-  approved: "approved",
-  returned: "returned",
-};
-
 export default function StatusBadge({ status }: { status: AfaStatus }) {
   const { label, bg, text } = statusConfig[status];
 
