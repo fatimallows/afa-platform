@@ -11,7 +11,7 @@ type ButtonVariant =
   | "flow-outline-white";
 
 const sharedClasses =
-  "inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2";
+  "inline-flex items-center justify-center gap-2 font-semibold transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60";
 
 // The original two variants share one fixed size (homepage CTA buttons); the
 // "flow-" variants belong to the "Submit an AFA" flow (src/app/submit), whose
