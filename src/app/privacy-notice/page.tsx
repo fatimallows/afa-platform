@@ -1,14 +1,30 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { createClient } from "@/lib/supabase/server";
 
 export const metadata = {
   title: "Privacy Notice | AFA Platform",
 };
 
-export default function PrivacyNoticePage() {
+export default async function PrivacyNoticePage() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let userInitial: string | undefined;
+  if (user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("full_name")
+      .eq("id", user.id)
+      .single();
+    userInitial = (profile?.full_name ?? user.email ?? "U").charAt(0).toUpperCase();
+  }
+
   return (
     <>
-      <Header variant="guest" />
+      <Header variant={user ? "authenticated" : "guest"} userInitial={userInitial} />
       <main className="bg-page-gray px-6 py-12 md:px-10 lg:py-16">
         <div className="mx-auto max-w-[760px] rounded-card border border-border-card bg-white p-8 md:p-12">
           <h1 className="text-[28px] font-bold text-navy sm:text-[34px]">Privacy Notice</h1>
