@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { IconUpload } from "@tabler/icons-react";
 import Button from "@/components/Button";
 import Field from "@/components/afa/Field";
@@ -11,33 +10,14 @@ import { getAfaTypeLabel } from "@/components/afa/afa-types";
 import { useSubmitFlow } from "@/app/submit/flow-context";
 
 export default function Step2Client() {
-  const { applicationName, setApplicationName, afaType, files, addFiles, removeFile, extractFields, cancelExtraction } =
-    useSubmitFlow();
+  const { applicationName, setApplicationName, afaType, files, addFiles, removeFile } = useSubmitFlow();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
-  const [isReading, setIsReading] = useState(false);
-  const router = useRouter();
   const typeLabel = getAfaTypeLabel(afaType) ?? "Not selected yet";
 
   function handleFiles(fileList: FileList | null) {
     if (!fileList || fileList.length === 0) return;
     addFiles(Array.from(fileList));
-  }
-
-  function handleContinueManually() {
-    router.push("/submit/step-3");
-  }
-
-  async function handleContinueWithAi() {
-    setIsReading(true);
-    await extractFields();
-    setIsReading(false);
-    router.push("/submit/step-3");
-  }
-
-  function handleCancelReading() {
-    cancelExtraction();
-    setIsReading(false);
   }
 
   return (
@@ -119,38 +99,13 @@ export default function Step2Client() {
         </>
       )}
 
-      <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-flow-border pt-6">
+      <div className="mt-8 flex flex-wrap justify-between gap-3 border-t border-flow-border pt-6">
         <Button href="/submit/step-1" variant="flow-outline-navy">
           ← Back
         </Button>
-
-        {files.length === 0 ? (
-          <Button type="button" variant="flow-yellow" onClick={handleContinueManually}>
-            Continue to review details →
-          </Button>
-        ) : isReading ? (
-          <div className="flex flex-wrap items-center gap-4">
-            <button
-              type="button"
-              onClick={handleCancelReading}
-              className="text-[15px] font-semibold text-flow-navy underline-offset-2 hover:underline"
-            >
-              Cancel and continue manually
-            </button>
-            <Button type="button" variant="flow-yellow" disabled>
-              Reading documents…
-            </Button>
-          </div>
-        ) : (
-          <div className="flex flex-wrap items-center gap-3">
-            <Button type="button" variant="flow-outline-navy" onClick={handleContinueManually}>
-              Fill in manually
-            </Button>
-            <Button type="button" variant="flow-yellow" onClick={handleContinueWithAi}>
-              Autofill with AI →
-            </Button>
-          </div>
-        )}
+        <Button href="/submit/step-3" variant="flow-yellow">
+          Continue to review details →
+        </Button>
       </div>
     </section>
   );
