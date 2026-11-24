@@ -59,6 +59,7 @@ export default async function Home() {
   }
 
   const ctaHref = user ? "/dashboard" : "/sign-in";
+  const submitHref = user ? "/submit/step-1" : "/sign-in";
 
   return (
     <>
@@ -92,7 +93,7 @@ export default async function Home() {
               </div>
 
               <div className="flex w-full max-w-[300px] flex-col gap-[16px] sm:max-w-none sm:flex-row sm:justify-center sm:gap-[40px]">
-                <Button href={ctaHref} variant="primary">
+                <Button href={submitHref} variant="primary">
                   Submit an AFA
                 </Button>
                 <Button href={ctaHref} variant="outline-light">
@@ -108,7 +109,11 @@ export default async function Home() {
 
               <div className="mt-6 grid grid-cols-2 gap-4 sm:gap-[32px] lg:grid-cols-4">
                 {features.map((feature) => (
-                  <FeatureCard key={feature.title} {...feature} href={ctaHref} />
+                  <FeatureCard
+                    key={feature.title}
+                    {...feature}
+                    href={feature.title === "Submit AFAs" ? submitHref : ctaHref}
+                  />
                 ))}
               </div>
             </div>
